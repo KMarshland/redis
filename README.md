@@ -6,13 +6,14 @@ Render private services are only visible to other Render services in your accoun
 
 Backing Redis with a disk makes it resilient to data loss in the case of restarts or deploys, and Render makes this easy to do with Render Disks.
 
+## Testing locally
+
+```bash
+docker build -t windborne_redis .
+docker run -it -p 10000:10000 -v (pwd)/data:/var/lib/redis windborne_redis 
+```
+
 ## Deployment
-
-### One Click Deploy
-
-Use the button below to deploy a persistent Redis instance on Render.
-
-[![Deploy to Render](http://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy)
 
 ### Manual Deployment
 
@@ -23,6 +24,4 @@ Use the button below to deploy a persistent Redis instance on Render.
 3. Add a new disk in the `Advanced` section. Give it a name and set the mount path to `/var/lib/redis`. You can also change the default size for your disk: `1 GB` should be enough for small projects.
 
 Click `Save` and you're good to go! Once deployed, your Redis instance will be available on a URL similar to `redis:10000`, and you can start using your Redis URL from other services in your Render account. Be sure to prepend `redis://` to the URL displayed in your dashboard.
-
-If you need help, you can always chat with us at https://render.com/chat.
 
